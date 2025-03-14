@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
             postContent.value = ''; // Clear input field
             submitPostBtn.disabled = true; // Disable button until new input
             thankYouSection.classList.remove('hidden'); // Show thank you section
-            localStorage.setItem('currentPost', content); // Store initial post temporarily in local storage
+            localStorage.setItem('currentPost', content); // Store initial post temporarily
         } else {
             alert('Please write something before posting!');
         }
@@ -42,14 +42,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // Submit revised post
     submitRevisionBtn.addEventListener('click', () => {
         const revisedContent = revisionContent.value.trim();
-        const originalContent = localStorage.getItem('currentPost'); // Retrieve the initial post from local storage
+        const originalContent = localStorage.getItem('currentPost'); // Retrieve the initial post
         if (revisedContent) {
             displayPost(revisedContent); // Display the revised post
             localStorage.removeItem('currentPost'); // Clear temporary storage
             revisionContent.value = ''; // Clear revision input
             submitRevisionBtn.disabled = true; // Disable revision button
             revisionSection.classList.add('hidden'); // Hide the revision section
-            alert('Revised post saved successfully!');
+            thankYouSection.classList.remove('hidden'); // Show thank you section
         } else {
             alert('Please revise your post before submitting!');
         }
