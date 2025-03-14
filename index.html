@@ -1,65 +1,56 @@
+
 <!DOCTYPE html>
- <html lang="en">
- <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Lifestyle Influencer Simulation</title>
-     <link rel="stylesheet" href="styles.css">
- </head>
- <body>
-     <header>
-         <img src="generic-logo.png" alt="Generic Logo" class="generic-logo">
-         <h1>Lifestyle Influencer Platform</h1>
-     </header>
- 
-     <!-- Create Post Section -->
-     <section id="create-post" class="post-form">
-         <h2>Create a Post</h2>
-         <p>Write a story about yourself, including hobbies, profession, or opinions.</p>        
-         <textarea id="post-content" placeholder="Write your story..."></textarea>
-         <button id="submit-post" disabled>Post</button>
-     </section>
- 
-     <!-- Thank You and Revision Section -->
-     <section id="thank-you" class="hidden">
-         <h2>Thank You for Posting!</h2>
-         <p>Your post has been added to your feed. Would you like to make any revisions?</p>
-         <button id="revise-post">Revise Post</button>
-     <!-- Feed Section -->
-     <section id="feed" class="feed">
-         <h2>Your Feed</h2>
-         <div id="post-feed"></div>
-     </section>
- 
-     <!-- Feedback Section -->
-     <section id="feedback" class="feedback-section">
-         <h2>Algorithm Feedback</h2>
-         <p>Percentage Reach: <span id="feedback-message">0.0</span></p>
-         <p>Engagement Score: <span id="engagement-score">0.0</span></p>
-         <p>Ad Revenue: <span id="reward-message">$0.00</span></p>
-     </section>
- 
-     <!-- Revision Section -->
-     <section id="revision-section" class="hidden">
-         <h2>Revise Your Post</h2>
-         <textarea id="revision-content" placeholder="Make changes to your post..."></textarea>
-         <p>Your post has been added to your feed. Would you like to make any revisions?</p>        
-         <textarea id="revision-content" placeholder="Revise your story..."></textarea>
-         <button id="submit-revision" disabled>Submit Revision</button>
-     </section>
- 
-     <!-- Feed Section -->
-     <section id="feed" class="feed">
-         <h2>Your Feed</h2>
-         <div id="post-feed"></div>
-     <!-- Post and Revised Posts Display Section -->
-     <section id="post-pairs" class="hidden">
-         <h2>Post-Revised Pairs</h2>
-         <div id="post-pairs-container"></div>
-     </section>
- 
-     <button id="download-data-btn">Download Post Data</button>
- 
-     <script src="script.js" type="module"></script>
- </body>
- </html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifestyle Influencer Simulation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="generic-logo.png" alt="Generic Logo" class="generic-logo">
+        <h1>Lifestyle Influencer Platform</h1>
+    </header>
+
+    <!-- Create Post Section -->
+    <section id="create-post" class="post-form">
+        <h2>Create a Post</h2>
+        <p>Write a story about yourself, including hobbies, profession, or opinions.</p>        
+        <textarea id="post-content" placeholder="Write your story..."></textarea>
+        <button id="submit-post" disabled>Post</button>
+    </section>
+
+    <!-- Feed Section -->
+    <section id="feed" class="feed">
+        <h2>Your Feed</h2>
+        <div id="post-feed"></div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section id="feedback" class="feedback-section">
+        <h2>Algorithm Feedback</h2>
+        <p>Percentage Reach: <span id="feedback-message">0.0</span></p>
+        <p>Engagement Score: <span id="engagement-score">0.0</span></p>
+        <p>Ad Revenue: <span id="reward-message">$0.00</span></p>
+    </section>
+
+    <!-- Revision Section -->
+    <section id="revision-section" class="hidden">
+        <h2>Revise Your Post</h2>
+        <p>Your post has been added to your feed. Would you like to make any revisions?</p>        
+        <textarea id="revision-content" placeholder="Revise your story..."></textarea>
+        <button id="submit-revision" disabled>Submit Revision</button>
+    </section>
+
+    <!-- Post and Revised Posts Display Section -->
+    <section id="post-pairs" class="hidden">
+        <h2>Post-Revised Pairs</h2>
+        <div id="post-pairs-container"></div>
+    </section>
+
+    <button id="download-data-btn">Download Post Data</button>
+
+    <script src="script.js" type="module"></script>
+</body>
+</html>
