@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const revisionSection = document.getElementById('revision-section');
     const revisionContent = document.getElementById('revision-content');
     const submitRevisionBtn = document.getElementById('submit-revision');
+    const feedbackSection = document.getElementById('feedback');
 
     // Enable/disable post button based on content input
     postContent.addEventListener('input', () => {
@@ -44,13 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const revisedContent = revisionContent.value.trim();
         const originalContent = localStorage.getItem('currentPost'); // Retrieve the initial post
         if (revisedContent) {
-            displayPost(revisedContent); // Display the revised post
+            const highlightedRevisions = highlightRevisions(originalContent, revisedContent);
+            displayPost(highlightedRevisions); // Display the revised post with highlights
             localStorage.removeItem('currentPost'); // Clear temporary storage
             revisionContent.value = ''; // Clear revision input
             submitRevisionBtn.disabled = true; // Disable revision button
             revisionSection.classList.add('hidden'); // Hide the revision section
-            // Automatically show the thank you section again or update UI as needed
-            thankYouSection.classList.remove('hidden'); // Show thank you section again
+            feedbackSection.classList.remove('hidden'); // Show feedback section
+            displayFeedbackMessage(); // Display a generic feedback message
         } else {
             alert('Please revise your post before submitting!');
         }
@@ -62,5 +64,27 @@ document.addEventListener("DOMContentLoaded", () => {
         post.classList.add('post');
         post.innerHTML = `<p>${content}</p>`;
         postFeed.prepend(post);
+    }
+
+    // Highlight revisions in the post content
+    function highlightRevisions(original, revised) {
+        const originalWords = original.split(' ');
+        const revisedWords = revised.split(' ');
+        let highlightedContent = '';
+
+        for (let i = 0; i < revisedWords.length; i++) {
+            if (originalWords[i] !== revisedWords[i]) {
+                highlightedContent += `<span class="highlight">${revisedWords[i]}</span> `;
+            } else {
+                highlightedContent += `${revisedWords[i]} `;
+            }
+        }
+        return highlightedContent.trim();
+    }
+
+    // Display a generic feedback message
+    function displayFeedbackMessage() {
+        const feedbackMessage = document.getElementById('feedback-message');
+        feedbackMessage.textContent = "The algorithm has analyzed your revisions and updated your post reach and engagement scores.";
     }
 });
