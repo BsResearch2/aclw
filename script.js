@@ -49,7 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
             revisionContent.value = ''; // Clear revision input
             submitRevisionBtn.disabled = true; // Disable revision button
             revisionSection.classList.add('hidden'); // Hide the revision section
-            thankYouSection.classList.remove('hidden'); // Show thank you section
+            // Automatically show the thank you section again or update UI as needed
+            thankYouSection.classList.remove('hidden'); // Show thank you section again
         } else {
             alert('Please revise your post before submitting!');
         }
