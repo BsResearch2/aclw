@@ -1,7 +1,3 @@
-// Import Firebase modules
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
-
 document.addEventListener("DOMContentLoaded", () => {
     const postFeed = document.getElementById('post-feed');
     const submitPostBtn = document.getElementById('submit-post');
@@ -22,38 +18,15 @@ document.addEventListener("DOMContentLoaded", () => {
         submitRevisionBtn.disabled = revisionContent.value.trim() === '';
     });
 
-    // Your Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyBf3w3osCrlXqIRhbAcRFpYkg-JAVWCidQ",
-        authDomain: "ac-experiment.firebaseapp.com",
-        projectId: "ac-experiment",
-        storageBucket: "ac-experiment.firebasestorage.app",
-        messagingSenderId: "83447059204",
-        appId: "1:83447059204:web:b1ec41e75843466a73f651",
-        measurementId: "G-07YV9JK6XG",
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    console.log("Firebase initialized successfully");
-
     // Post Submission Logic
-    submitPostBtn.addEventListener('click', async () => {
+    submitPostBtn.addEventListener('click', () => {
         const content = postContent.value.trim();
         if (content) {
-            try {
-                await savePost(content, "initial"); // Save to Firestore
-                displayPost(content); // Display the post
-                postContent.value = ''; // Clear input field
-                submitPostBtn.disabled = true; // Disable button until new input
-                thankYouSection.classList.remove('hidden'); // Show thank you section
-                localStorage.setItem('currentPost', content); // Store initial post temporarily
-            } catch (error) {
-                alert("Failed to save the post. Please try again.");
-                console.error(error);
-            }
+            displayPost(content); // Display the post
+            postContent.value = ''; // Clear input field
+            submitPostBtn.disabled = true; // Disable button until new input
+            thankYouSection.classList.remove('hidden'); // Show thank you section
+            localStorage.setItem('currentPost', content); // Store initial post temporarily
         } else {
             alert('Please write something before posting!');
         }
@@ -67,22 +40,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Submit revised post
-    submitRevisionBtn.addEventListener('click', async () => {
+    submitRevisionBtn.addEventListener('click', () => {
         const revisedContent = revisionContent.value.trim();
         const originalContent = localStorage.getItem('currentPost'); // Retrieve the initial post
         if (revisedContent) {
-            try {
-                await savePost(revisedContent, "revised"); // Save to Firestore
-                displayPost(revisedContent); // Display the revised post
-                localStorage.removeItem('currentPost'); // Clear temporary storage
-                revisionContent.value = ''; // Clear revision input
-                submitRevisionBtn.disabled = true; // Disable revision button
-                revisionSection.classList.add('hidden'); // Hide the revision section
-                alert('Revised post saved successfully!');
-            } catch (error) {
-                alert("Failed to save the revised post. Please try again.");
-                console.error(error);
-            }
+            displayPost(revisedContent); // Display the revised post
+            localStorage.removeItem('currentPost'); // Clear temporary storage
+            revisionContent.value = ''; // Clear revision input
+            submitRevisionBtn.disabled = true; // Disable revision button
+            revisionSection.classList.add('hidden'); // Hide the revision section
+            alert('Revised post saved successfully!');
         } else {
             alert('Please revise your post before submitting!');
         }
@@ -94,15 +61,5 @@ document.addEventListener("DOMContentLoaded", () => {
         post.classList.add('post');
         post.innerHTML = `<p>${content}</p>`;
         postFeed.prepend(post);
-    }
-
-    // Save post to Firestore
-    async function savePost(content, type) {
-        try {
-            await addDoc(collection(db, "posts"), { content, type, timestamp: new Date() });
-            console.log(`${type} post saved successfully!`);
-        } catch (error) {
-            throw new Error("Error saving post to Firestore");
-        }
     }
 });
